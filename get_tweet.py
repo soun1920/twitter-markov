@@ -22,12 +22,10 @@ max_tweets = 20000
 
 
 def getMtTweet():
-    # 取得したツイートを格納するための配列
     tweets = []
     num = 0
     i = 1
     print('page ' + str(i))
-    # 自分のタイムラインを取得するためuser_timelineを使用します。1リクエストで取得できるツイートの上限数は100です。
     tweet_data = api.user_timeline(screen_name="Jasper7se", count=100)
 
     if len(tweet_data) > 0:
@@ -63,7 +61,6 @@ def getMtTweet():
                 if num >= max_tweets:
                     break
                 i += 1
-                # Twitter API制限の上限でエラーにならないようにディレイをかけています。
                 time.sleep((15*60)/180)
             else:
                 break
@@ -71,7 +68,6 @@ def getMtTweet():
 
 
 def saveTweets(tweets):
-    # csv使ってますがデータセット用にテキストファイルで保存します。
     file_path = './data/Tweets.txt'
     file = open(file_path, 'w', encoding='UTF-8')
     m = MeCab.Tagger('-Owakati')
